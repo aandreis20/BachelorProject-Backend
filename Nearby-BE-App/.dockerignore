@@ -1,0 +1,10 @@
+target/
+!target/*.jar
+!target/classes/
+!target/maven-archiver/
+!target/maven-status/
+!target/nearby-backend-0.0.1-SNAPSHOT.jar
+.git
+.gitignore
+README.md
+.DS_Store 
