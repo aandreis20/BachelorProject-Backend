@@ -34,7 +34,7 @@ public class UserService {
         user.setGender(request.getGender());
         user.setBio(request.getBio());
         user.setInterests(request.getInterests());
-        user.setProfilePictureUrl(request.getProfilePictureUrl());
+        // user.setProfilePictureUrl(request.getProfilePictureUrl()); // eliminat, nu mai vine din request
         user.setBluetoothEnabled(request.getBluetoothEnabled());
         // locationEnabled eliminat
         User savedUser = userRepository.save(user);

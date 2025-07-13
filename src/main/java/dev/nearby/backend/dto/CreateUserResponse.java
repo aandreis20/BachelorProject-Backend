@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public class CreateUserResponse {
     
-    private Long id;
     private UUID accountId;
     private Integer age;
     private User.Gender gender;
@@ -23,7 +22,6 @@ public class CreateUserResponse {
     public CreateUserResponse() {}
     
     public CreateUserResponse(User user) {
-        this.id = user.getId();
         this.accountId = user.getAccountId();
         this.username = user.getUsername();
         this.fullName = user.getFullName();
@@ -37,14 +35,6 @@ public class CreateUserResponse {
     }
     
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
     public UUID getAccountId() {
         return accountId;
     }

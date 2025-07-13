@@ -30,8 +30,6 @@ public class CreateUserRequest {
     @Size(max = 10, message = "Cannot have more than 10 interests")
     private List<String> interests;
     
-    private String profilePictureUrl;
-    
     private Boolean bluetoothEnabled = false;
     
     // Constructors
@@ -82,14 +80,6 @@ public class CreateUserRequest {
     
     public void setInterests(List<String> interests) {
         this.interests = interests;
-    }
-    
-    public String getProfilePictureUrl() {
-        return profilePictureUrl;
-    }
-    
-    public void setProfilePictureUrl(String profilePictureUrl) {
-        this.profilePictureUrl = profilePictureUrl;
     }
     
     public Boolean getBluetoothEnabled() {
