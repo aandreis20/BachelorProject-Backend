@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "*") // Pentru dezvoltare - în producție specifică domeniile exacte
@@ -32,10 +34,10 @@ public class UserController {
         }
     }
     
-    @GetMapping("/{id}")
-    public ResponseEntity<CreateUserResponse> getUserById(@PathVariable Long id) {
+    @GetMapping("/{accountId}")
+    public ResponseEntity<CreateUserResponse> getUserByAccountId(@PathVariable UUID accountId) {
         try {
-            CreateUserResponse response = userService.getUserById(id);
+            CreateUserResponse response = userService.getUserByAccountId(accountId);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             throw new RuntimeException("User not found: " + e.getMessage());

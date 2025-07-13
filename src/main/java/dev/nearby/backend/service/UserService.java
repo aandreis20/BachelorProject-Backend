@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class UserService {
@@ -39,9 +41,9 @@ public class UserService {
         return new CreateUserResponse(savedUser);
     }
     
-    public CreateUserResponse getUserById(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    public CreateUserResponse getUserByAccountId(UUID accountId) {
+        User user = userRepository.findByAccountId(accountId)
+                .orElseThrow(() -> new RuntimeException("User not found with accountId: " + accountId));
         return new CreateUserResponse(user);
     }
     

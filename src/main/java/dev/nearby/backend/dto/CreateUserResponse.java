@@ -3,11 +3,12 @@ package dev.nearby.backend.dto;
 import dev.nearby.backend.model.User;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class CreateUserResponse {
     
     private Long id;
-    private String nickname;
+    private UUID accountId;
     private Integer age;
     private User.Gender gender;
     private String bio;
@@ -23,6 +24,7 @@ public class CreateUserResponse {
     
     public CreateUserResponse(User user) {
         this.id = user.getId();
+        this.accountId = user.getAccountId();
         this.username = user.getUsername();
         this.fullName = user.getFullName();
         this.age = user.getAge();
@@ -43,12 +45,11 @@ public class CreateUserResponse {
         this.id = id;
     }
     
-    public String getNickname() {
-        return nickname;
+    public UUID getAccountId() {
+        return accountId;
     }
-    
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setAccountId(UUID accountId) {
+        this.accountId = accountId;
     }
     
     public Integer getAge() {

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -12,6 +13,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "account_id", unique = true, updatable = false, nullable = false, columnDefinition = "uuid")
+    private UUID accountId;
     
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 30, message = "Username must be between 3 and 30 characters")
@@ -58,6 +62,9 @@ public class User {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
+        if (accountId == null) {
+            accountId = UUID.randomUUID();
+        }
     }
     
     @PreUpdate
@@ -89,6 +96,13 @@ public class User {
     
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public UUID getAccountId() {
+        return accountId;
+    }
+    public void setAccountId(UUID accountId) {
+        this.accountId = accountId;
     }
     
     public String getUsername() { return username; }
