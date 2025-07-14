@@ -2,6 +2,7 @@ package dev.nearby.backend.service;
 
 import dev.nearby.backend.dto.CreateUserRequest;
 import dev.nearby.backend.dto.CreateUserResponse;
+import dev.nearby.backend.dto.UpdateUserRequest;
 import dev.nearby.backend.model.User;
 import dev.nearby.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,20 @@ public class UserService {
 
     public boolean isUsernameAvailable(String username) {
         return !userRepository.existsByUsername(username);
+    }
+
+    public CreateUserResponse updateUser(UUID accountId, UpdateUserRequest request) {
+        User user = userRepository.findByAccountId(accountId)
+                .orElseThrow(() -> new RuntimeException("User not found with accountId: " + accountId));
+        if (request.getUsername() != null) user.setUsername(request.getUsername());
+        if (request.getFullName() != null) user.setFullName(request.getFullName());
+        if (request.getAge() != null) user.setAge(request.getAge());
+        if (request.getGender() != null) user.setGender(request.getGender());
+        if (request.getBio() != null) user.setBio(request.getBio());
+        if (request.getInterests() != null) user.setInterests(request.getInterests());
+        if (request.getProfilePictureUrl() != null) user.setProfilePictureUrl(request.getProfilePictureUrl());
+        if (request.getBluetoothEnabled() != null) user.setBluetoothEnabled(request.getBluetoothEnabled());
+        User savedUser = userRepository.save(user);
+        return new CreateUserResponse(savedUser);
     }
 } 

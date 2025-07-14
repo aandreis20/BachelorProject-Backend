@@ -3,6 +3,7 @@ package dev.nearby.backend.controller;
 import dev.nearby.backend.dto.CreateUserRequest;
 import dev.nearby.backend.dto.CreateUserResponse;
 import dev.nearby.backend.dto.UsernameAvailabilityResponse;
+import dev.nearby.backend.dto.UpdateUserRequest;
 import dev.nearby.backend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,16 @@ public class UserController {
     public ResponseEntity<UsernameAvailabilityResponse> checkUsernameAvailability(@RequestParam("username") String username) {
         boolean available = userService.isUsernameAvailable(username);
         return ResponseEntity.ok(new UsernameAvailabilityResponse(available));
+    }
+
+    @PatchMapping("/{accountId}")
+    public ResponseEntity<CreateUserResponse> updateUser(@PathVariable UUID accountId, @RequestBody UpdateUserRequest request) {
+        try {
+            CreateUserResponse response = userService.updateUser(accountId, request);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Failed to update user: " + e.getMessage());
+        }
     }
     
     // Endpoint pentru health check
